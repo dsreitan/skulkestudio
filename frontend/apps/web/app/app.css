@@ -1,0 +1,26 @@
+html,
+body {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  @media (prefers-color-scheme: dark) {
+    color: white;
+  }
+}

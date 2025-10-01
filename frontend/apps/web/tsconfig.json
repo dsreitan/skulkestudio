@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "include": [
+    "**/*",
+    "**/.server/**/*",
+    "**/.client/**/*",
+    ".react-router/types/**/*"
+  ],
+  "compilerOptions": {
+    "types": ["node", "vite/client"],
+    "target": "ES2023",
+    "rootDirs": [".", "./.react-router/types"],
+    "paths": {
+      "~/*": ["./app/*"],
+      "ui/*": ["../../packages/ui/src/*"],
+    },
+    "esModuleInterop": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+  }
+}
