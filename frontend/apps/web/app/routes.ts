@@ -1,9 +1,23 @@
-import { index, type RouteConfig, route } from "@react-router/dev/routes";
+import {
+  index,
+  layout,
+  prefix,
+  type RouteConfig,
+  route,
+} from "@react-router/dev/routes";
 
 export default [
-  index("routes/home.tsx"),
-  route("about", "routes/about.tsx"),
-  route("app", "routes/app.home.tsx"),
-  route("app/page-a", "routes/app.page-a.tsx"),
-  route("app/page-b", "routes/app.page-b.tsx"),
+  layout("./routes/site/layout.tsx", [index("./routes/site/index.tsx")]),
+  ...prefix("tv-aksjonen", [
+    layout("./routes/tv-aksjonen/layout.tsx", [
+      index("./routes/tv-aksjonen/index.tsx"),
+      route(":id", "./routes/tv-aksjonen/$id.tsx"),
+    ]),
+  ]),
+  ...prefix("app", [
+    layout("./routes/app/layout.tsx", [
+      index("./routes/app/index.tsx"),
+      route("*", "./routes/app/$.tsx"),
+    ]),
+  ]),
 ] satisfies RouteConfig;
