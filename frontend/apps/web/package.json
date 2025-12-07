@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "move": "cp -r ./dist/client/* ../../../backend/SkulkeStudio.Api/wwwroot",
+    "move": "cp -r ./dist/client/* ../../../backend/Skulkestudio.Api/wwwroot",
     "build": "react-router build && yarn move",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/client",
