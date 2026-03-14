@@ -1,9 +1,12 @@
 import type { Page } from "./types";
 
 function getApiHost(): string {
-  if (typeof import.meta !== "undefined" && import.meta.env?.VITE_API_URL) {
-    return import.meta.env.VITE_API_URL;
-  }
+  // In the browser, always use relative URLs. During dev Vite proxies
+  // /api/* to the .NET backend; in production the .NET server serves
+  // both the static files and the API on the same origin.
+  if (typeof window !== "undefined") return "";
+
+  // During build / prerender (Node context) we need a full URL.
   if (typeof process !== "undefined" && process.env?.VITE_API_URL) {
     return process.env.VITE_API_URL;
   }
