@@ -10,6 +10,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": { target: API_TARGET, changeOrigin: true },
+      "/openapi": { target: API_TARGET, changeOrigin: true },
       "/login": { target: API_TARGET, changeOrigin: true },
       "/logout": { target: API_TARGET, changeOrigin: true },
     },
