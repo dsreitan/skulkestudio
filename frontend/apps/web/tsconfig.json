@@ -4,8 +4,7 @@
     "**/*",
     "**/.server/**/*",
     "**/.client/**/*",
-    ".react-router/types/**/*",
-    "app/routes/tv-aksjonen/$id.tsx"
+    ".react-router/types/**/*"
   ],
   "compilerOptions": {
     "types": ["node", "vite/client"],

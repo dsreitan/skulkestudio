@@ -8,10 +8,10 @@ import {
 
 export default [
   layout("./routes/site/layout.tsx", [index("./routes/site/index.tsx")]),
-  ...prefix("tv-aksjonen", [
-    layout("./routes/tv-aksjonen/layout.tsx", [
-      index("./routes/tv-aksjonen/index.tsx"),
-      route(":id", "./routes/tv-aksjonen/$id.tsx"),
+  ...prefix(":section", [
+    layout("./routes/content/layout.tsx", [
+      index("./routes/content/index.tsx"),
+      route(":id", "./routes/content/$id.tsx"),
     ]),
   ]),
   ...prefix("app", [

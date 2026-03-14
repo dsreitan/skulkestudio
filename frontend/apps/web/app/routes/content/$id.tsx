@@ -1,12 +1,12 @@
 import { getPage } from "../../api";
 import type { Route } from "./+types/$id";
 
-export async function loader({ params }: Route.ClientLoaderArgs) {
-  return await getPage(`tv-aksjonen/${params.id}`);
+export async function loader({ params }: Route.LoaderArgs) {
+  return getPage(`${params.section}/${params.id}`);
 }
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
-  return await getPage(`tv-aksjonen/${params.id}`);
+  return getPage(`${params.section}/${params.id}`);
 }
 
 export function meta({ loaderData }: Route.MetaArgs) {

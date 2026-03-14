@@ -1,19 +1,23 @@
 import { Link, Outlet } from "react-router";
-import { getAuthStatus } from "../../auth";
+import { getInitialState } from "../../auth";
 import type { Route } from "./+types/layout";
 
 export async function clientLoader() {
-  return getAuthStatus();
+  return getInitialState();
 }
 
 export default function Layout({ loaderData }: Route.ComponentProps) {
-  const { isAuthenticated } = loaderData;
+  const { isAuthenticated, sections } = loaderData;
 
   return (
     <>
       <header>
         <Link to="/">home</Link>
-        <Link to="/tv-aksjonen">TV-aksjonen</Link>
+        {sections.map((s) => (
+          <Link key={s.id} to={`/${s.id}`}>
+            {s.title}
+          </Link>
+        ))}
         {isAuthenticated ? (
           <a href="/logout">logout</a>
         ) : (
