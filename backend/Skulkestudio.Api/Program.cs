@@ -6,6 +6,7 @@ using Skulkestudio.Api.Middleware;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton<PageService>();
+builder.Services.AddOpenApi();
 
 builder.Services.AddCors(options =>
 {
@@ -52,6 +53,8 @@ builder.Services.AddAuthorizationBuilder()
         .AddPolicy("Authenticated", policy => policy.RequireAuthenticatedUser());
 
 var app = builder.Build();
+
+app.MapOpenApi();
 
 app.UseDefaultFiles(new DefaultFilesOptions { RedirectToAppendTrailingSlash = false });
 app.UseCors("localhost");
@@ -103,8 +106,11 @@ app.UseStaticFiles();
 
 app.MapGet("/api/pages/{parentId}", (PageService pageService, string parentId) =>
 {
-    return Results.Ok(pageService.GetChildren(parentId));
-});
+    return pageService.GetChildren(parentId);
+})
+.WithName("GetPages")
+.WithTags("Pages")
+.Produces<IEnumerable<Page>>();
 
 app.MapGet("/api/page/{*id}", (PageService pageService, string id) =>
 {
@@ -112,6 +118,10 @@ app.MapGet("/api/page/{*id}", (PageService pageService, string id) =>
     return page is null
         ? Results.NotFound()
         : Results.Ok(page);
-});
+})
+.WithName("GetPage")
+.WithTags("Pages")
+.Produces<Page>()
+.ProducesProblem(StatusCodes.Status404NotFound);
 
 app.Run();
