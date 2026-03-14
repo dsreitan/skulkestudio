@@ -10,4 +10,7 @@
   <ItemGroup>
     <Content Include="wwwroot/**/*" CopyToPublishDirectory="PreserveNewest" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.5" />
+  </ItemGroup>
 </Project>

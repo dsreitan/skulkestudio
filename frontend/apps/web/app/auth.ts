@@ -1,4 +1,3 @@
-// Type for the injected initial state
 declare global {
   interface Window {
     initialState?: {
@@ -6,30 +5,25 @@ declare global {
         isAuthenticated: boolean;
         username: string | null;
       };
+      sections: Array<{ id: string; title: string }>;
     };
   }
 }
 
-/**
- * Gets the authentication status from the injected initial state.
- * Available immediately on page load, no async needed.
- * The state is set synchronously in the <head> before React renders.
- */
-export function getAuthStatus() {
-  if (typeof window === "undefined") {
-    return { isAuthenticated: false, username: null };
+const defaults = {
+  isAuthenticated: false,
+  username: null as string | null,
+  sections: [] as Array<{ id: string; title: string }>,
+};
+
+export function getInitialState() {
+  if (typeof window === "undefined" || !window.initialState) {
+    return defaults;
   }
-  
-  // Ensure initialState exists (it should be set synchronously before React renders)
-  // If it doesn't exist yet, return false to prevent flash
-  if (!window.initialState) {
-    // This shouldn't happen, but fallback to prevent flash
-    return { isAuthenticated: false, username: null };
-  }
-  
+
   return {
     isAuthenticated: window.initialState.user?.isAuthenticated ?? false,
     username: window.initialState.user?.username ?? null,
+    sections: window.initialState.sections ?? [],
   };
 }
-
