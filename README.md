@@ -1,4 +1,4 @@
-# Skolestudio
+# Skulkestudio
 
 A modern architecture combining a .NET backend with a React Router 7 frontend that supports both pre-rendered (static) pages and an authenticated SPA — all from a single codebase.
 
