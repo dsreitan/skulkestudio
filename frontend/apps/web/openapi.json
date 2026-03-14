@@ -10,6 +10,29 @@
     }
   ],
   "paths": {
+    "/api/sections": {
+      "get": {
+        "tags": [
+          "Pages"
+        ],
+        "operationId": "GetSections",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/pages/{parentId}": {
       "get": {
         "tags": [

@@ -7,6 +7,14 @@
 import * as zod from 'zod';
 
 
+export const GetSections200ResponseItem = zod.object({
+  "id": zod.string(),
+  "title": zod.string(),
+  "parentId": zod.string().nullish(),
+  "content": zod.string().nullish()
+}).strict()
+export const GetSections200Response = zod.array(GetSections200ResponseItem)
+
 export const GetPagesParams = zod.object({
   "parentId": zod.string()
 }).strict()
