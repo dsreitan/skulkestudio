@@ -6,16 +6,9 @@ namespace Skulkestudio.Api.Middleware;
 /// authentication status.  This lets the React client read auth state immediately
 /// on page load without an extra fetch.
 /// </summary>
-public sealed class AuthInjectionMiddleware
+public sealed class AuthInjectionMiddleware(RequestDelegate next)
 {
-    private readonly RequestDelegate _next;
-
     private static readonly string[] SkippedPrefixes = ["/api", "/app", "/login", "/logout"];
-
-    public AuthInjectionMiddleware(RequestDelegate next)
-    {
-        _next = next;
-    }
 
     public async Task InvokeAsync(HttpContext context)
     {
@@ -23,7 +16,7 @@ public sealed class AuthInjectionMiddleware
 
         if (ShouldSkip(path))
         {
-            await _next(context);
+            await next(context);
             return;
         }
 
@@ -36,7 +29,7 @@ public sealed class AuthInjectionMiddleware
             return;
         }
 
-        await _next(context);
+        await next(context);
     }
 
     private static bool ShouldSkip(string path)
