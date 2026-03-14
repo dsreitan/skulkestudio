@@ -104,6 +104,14 @@ app.MapFallback("/app/{*path}", async (HttpContext context, string path) =>
 
 app.UseStaticFiles();
 
+app.MapGet("/api/sections", (PageService pageService) =>
+{
+    return pageService.GetRootPages();
+})
+.WithName("GetSections")
+.WithTags("Pages")
+.Produces<IEnumerable<Page>>();
+
 app.MapGet("/api/pages/{parentId}", (PageService pageService, string parentId) =>
 {
     return pageService.GetChildren(parentId);
